@@ -1,0 +1,26 @@
+import { DOM } from 'rx-dom';
+
+export function searchWikipedia(term) {
+  const cleanTerm = global.encodeURIComponent(term);
+  const url = 'http://en.wikipedia.org/w/api.php?' +
+    'action=opensearch&format=json&search=' +
+    cleanTerm +
+    '&callback=JSONPCallback';
+  return DOM.jsonpRequest(url);
+}
+
+export default function wikiAutocompletedSaga(actions$) {
+  return actions$
+    .filter(action => action.type === 'wiki-search')
+    .map(({ payload: e }) => e)
+    .map(e => e.target.value)
+    .filter(text => text.length > 2)
+    .throttle(750)
+    .distinctUntilChanged()
+    .flatMapLatest(text => searchWikipedia(text))
+    .filter(data => data.length >= 2)
+    .map(results => ({
+      type: 'wiki-search-completed',
+      payload: results[1]
+    }));
+}
