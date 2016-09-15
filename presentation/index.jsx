@@ -9,9 +9,12 @@ import {
   List,
   ListItem,
   Slide,
+  Image,
   Spectacle,
   Text
 } from 'spectacle';
+
+import preloader from 'spectacle/lib/utils/preloader';
 
 import CodeSlide from 'spectacle-code-slide';
 
@@ -23,12 +26,31 @@ require('normalize.css');
 require('spectacle/lib/themes/default/index.css');
 
 import WikiSearch from './Wiki-Search.jsx';
+const images = {
+  partyParrot: require('../assets/party-parrot.png')
+};
+
+preloader(images);
+
+const reactBlue = '#00d8ff';
+
 const theme = createTheme({
-  primary: '#ffffff'
+  primary: '#222',
+  secondary: reactBlue,
+  tertiary: 'white',
+  quartenary: reactBlue
 });
 
 export default class Presentation extends React.Component {
   render() {
+    const partyParrot = (
+      <Image
+        display='inline'
+        height={ 20 }
+        src={ images.partyParrot }
+        style={{ margin: 0 }}
+      />
+    );
     return (
       <Spectacle theme={theme}>
         <Deck transition={['zoom', 'slide']} transitionDuration={500}>
@@ -40,16 +62,12 @@ export default class Presentation extends React.Component {
               fit={ true }
               lineHeight={ 1 }
               size={ 1 }
-              textColor='black'>
-              React, RxJS, and You
-            </Heading>
-            <Heading
-              caps={ true }
-              fit={ true }
-              size={ 1 }>
-              Observables for a better tomorrow
+              >
+              Redux + RxJS === { partyParrot }
             </Heading>
           </Slide>
+          {
+            /*
           <Slide
             bgColor='secondary'>
             <Link
@@ -58,7 +76,7 @@ export default class Presentation extends React.Component {
               <Text
                 bold={ true }
                 caps={ true }
-                textColor='tertiary'>
+                >
                 View on Github:
               </Text>
               <Heading
@@ -69,6 +87,8 @@ export default class Presentation extends React.Component {
               </Heading>
             </Link>
           </Slide>
+            */
+          }
           <Slide>
             <Heading
               textColor='secondary'>
@@ -78,13 +98,16 @@ export default class Presentation extends React.Component {
               bold={ true }
               caps={ true }>
               <ListItem>
-                CTO of Free Code Camp
+                Developer at Free Code Camp
+              </ListItem>
+              <ListItem>
+                Teacher at Real World React
               </ListItem>
               <ListItem>
                 @BerkeleyTrue on the internet
               </ListItem>
               <ListItem>
-                React/RxJS Advocate
+                RxJS Advocate
               </ListItem>
               <ListItem>
                 Self Taught Programming for over two years
@@ -107,35 +130,16 @@ export default class Presentation extends React.Component {
               caps={ true }
               textColor='white'>
               <ListItem>
-                What is RxJS and Observables?
+                Current Redux Async Tools
+              </ListItem>
+              <ListItem>
+                What are Observables?
               </ListItem>
               <ListItem>
                 Why are Observables awesome?
               </ListItem>
               <ListItem>
-                How to Observables in React
-              </ListItem>
-              <ListItem>
                 How to Observables in Redux
-              </ListItem>
-            </List>
-          </Slide>
-          <Slide bgColor='secondary'>
-            <Heading>
-              This is not an:
-            </Heading>
-            <List
-              bold={ true }
-              caps={ true }
-              textColor='white'>
-              <ListItem>
-                Intro to React
-              </ListItem>
-              <ListItem>
-                Intro to RxJS
-              </ListItem>
-              <ListItem>
-                Intro to Redux
               </ListItem>
             </List>
           </Slide>
@@ -156,7 +160,7 @@ export default class Presentation extends React.Component {
               bold={ true }
               caps={ true }
               textColor='primary'>
-              A library for creating Observables
+              A library for creating Observables created by Microsoft
             </Text>
           </Slide>
           <Slide
@@ -266,47 +270,6 @@ hours and refreshes itself on the next request?
               Observables.
             </Heading>
           </Slide>
-          <Slide bgColor='secondary'>
-            <Heading
-              size={ 1 }
-              textColor='primary'>
-              How to Observables in React?
-            </Heading>
-          </Slide>
-          <Slide>
-            <Heading
-              textColor='secondary'>
-              Purpose built libraries
-            </Heading>
-            <List
-              bold={ true }
-              caps={ true }>
-              <ListItem>
-                rx-react: RxJS bindings for React
-              </ListItem>
-              <ListItem>
-                rx-recompose: compose React function components
-                or Higher Order Components(HOC)
-                using RxJS
-              </ListItem>
-            </List>
-          </Slide>
-          <Slide>
-            <WikiSearch />
-          </Slide>
-          <CodeSlide
-            bgColor='primary'
-            code={ require('raw!../assets/deck.example') }
-            lang='jsx'
-            ranges={[
-              { loc: [0, 1] },
-              { loc: [21, 41] },
-              { loc: [2, 7] },
-              { loc: [8, 19] }
-            ]}
-            textSize={ 25 }
-            transition={['zoom', 'fade']}
-          />
           <Slide
             bgColor='secondary'
             notes={`
@@ -317,6 +280,9 @@ In Redux, What is a side-effect?
               textColor='primary'>
               How to Observables in Redux?
             </Heading>
+          </Slide>
+          <Slide>
+            <WikiSearch />
           </Slide>
           <Slide
             bgColor='secondary'
@@ -381,20 +347,20 @@ Responding to user mouse clicks
                 Redux-Rx
               </ListItem>
               <ListItem>
-                Redux-Saga
+                Redux-Observable
               </ListItem>
             </List>
           </Slide>
           <Slide>
             <Heading
               textColor='secondary'>
-            Redux-Saga
+            Redux-Observable
             </Heading>
           </Slide>
           <Slide>
             <Heading
               textColor='secondary'>
-              Why saga's are better
+              Why (Epics/Sagas) are better
             </Heading>
             <List
               bold={ true }
@@ -406,7 +372,7 @@ Responding to user mouse clicks
                 Action Creators are plain functions
               </ListItem>
               <ListItem>
-                Saga's can individually be tested
+                Epic's can individually be tested
               </ListItem>
             </List>
           </Slide>
@@ -424,13 +390,13 @@ Responding to user mouse clicks
           <Slide>
             <Heading
               textColor='secondary'>
-              In comes Redux-Epic
+              In comes Redux-Observable
             </Heading>
           </Slide>
           <Slide>
             <Heading
               textColor='secondary'>
-              Why Redux-Epic?
+              Why Redux-Observable?
             </Heading>
             <List
               bold={ true }
@@ -443,16 +409,13 @@ Responding to user mouse clicks
                   Smaller API surface
                 </ListItem>
                 <ListItem>
-                  Server-Side data pre-fetching
+                  Server-Side data pre-fetching (coming soon...)
                 </ListItem>
               </List>
-              <ListItem>
-                Inject dependencies right into your sagas
-              </ListItem>
             </List>
           </Slide>
           <CodeSlide
-            code={ require('raw!../assets/saga2.example') }
+            code={ require('raw!../assets/epic.example') }
             lang='jsx'
             ranges={[
               { loc: [ 0, 1 ] },
@@ -467,7 +430,7 @@ Responding to user mouse clicks
             transition={[]}
           />
           <CodeSlide
-            code={ require('raw!../assets/saga-autocomplete.example') }
+            code={ require('raw!../assets/autocomplete.example') }
             lang='jsx'
             ranges={[
               { loc: [ 0, 1 ] },
@@ -475,20 +438,6 @@ Responding to user mouse clicks
               { loc: [ 11, 26 ] },
               { loc: [ 13, 25 ] },
               { loc: [ 21, 25 ] }
-            ]}
-            textSize={ 20 }
-            transition={[]}
-          />
-          <CodeSlide
-            code={ require('raw!../assets/saga-with-deps.example') }
-            lang='jsx'
-            ranges={[
-              { loc: [ 0, 10 ] },
-              { loc: [ 2, 3 ] },
-              { loc: [ 3, 9 ] },
-              { loc: [ 4, 5 ] },
-              { loc: [ 5, 6 ] },
-              { loc: [ 6, 7 ] }
             ]}
             textSize={ 20 }
             transition={[]}

@@ -1,0 +1,14 @@
+import { Observable } from 'rxjs';
+import services from './services';
+import { fetchChallengesCompleted } from './actionCreators';
+
+export default function fetchChallengesEpic(actions) {
+  return actions.ofType('FETCH_CHALLENGE')
+    .flatMap(() => {
+      return services.readService$({ service: 'challenges' })
+        .map(({ entities, result } = {}) => {
+          return fetchChallengesCompleted(entities, result);
+        })
+        .catch(error => Observable.of({ type: 'HANDLE_ERROR', error }));
+    });
+}

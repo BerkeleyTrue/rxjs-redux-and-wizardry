@@ -1,0 +1,33 @@
+
+function logOutTimerEpic(actions) {
+  return actions.ofType('MOUSE_CLICK')
+    // make sure it starts without first waiting for the first action
+    .startWith(null)
+    // cancel last observable with every new action
+    .switchMap(() => Observable.merge(
+      Observable.of({ type: 'warning' }).delay(secondsToMilliseconds(2)),
+      Observable.of({ type: 'logOut' }).delay(secondsToMilliseconds(3))
+    ));
+}
+
+class App extends React.Component {
+  //...
+  componentDidMount() {
+    // redux dispatch
+    const { dispatch } = this.props;
+    this.cancel = Observable.fromEvent(document.body, 'click')
+      .map(() => ({ type: 'MOUSE_CLICK' }));
+  }
+
+  componentWillUnmount() {
+    this.cancel();
+  }
+  //...
+}
+
+function mouseEpic() {
+  return Observable.fromEvent(document.body, 'click')
+    .mapTo({
+      type: 'MOUSE_CLICK'
+    });
+}

@@ -1,0 +1,84 @@
+// source
+// https://github.com/OliverJAsh/autocomplete-comparison
+
+let previousXhr;
+function makeGetRequest(url) {
+  // * * * * * * * * *
+  // 5. switchMap
+  // * * * * * * * * *
+  if (previousXhr) {
+    // cancel previous request
+    previousXhr.abort();
+  }
+  // 6 make xhr request
+  const xhr = new XMLHttpRequest();
+  // flatMapLatest
+  previousXhr = xhr;
+  xhr.open('GET', url, true);
+  xhr.send();
+  return new Promise((resolve, reject) => {
+    xhr.onload = () => resolve(xhr);
+    xhr.onerror = () => reject(xhr);
+  });
+}
+
+function searchWikipedia(term) {
+  const cleanTerm = global.encodeURIComponent(term);
+  const url = 'https://en.wikipedia.org/w/api.php?' +
+    'action=opensearch&format=json&search=' +
+    cleanTerm +
+    '&origin=*';
+  return makeGetRequest(url)
+    // * * * * * * * * *
+    // 7. map
+    // * * * * * * * * *
+    .then(xhr => JSON.parse(xhr.response))
+    // * * * * * * * *
+    // 8. can't filter promise stream. Hope for the best????
+    // * * * * * * * * *
+    // 9. map
+    // * * * * * * * * *
+    .then(data => data[1]);
+}
+
+let previousValue;
+function searchDistinctUntilChanged(value) {
+  // * * * * * * * * *
+  // 4. distinctUntilChanged
+  // * * * * * * * * *
+  if (value !== previousValue) {
+    return searchWikipedia(value);
+  }
+  previousValue = value;
+  return null;
+}
+
+function search(value) {
+  // maybePromise may be a promise or null
+  const maybePromise = searchDistinctUntilChanged(value);
+  if (!maybePromise) {
+    return null;
+  }
+  return maybePromise.then(results => {
+    this.setState({ results });
+  });
+}
+
+const debouncedSearch = debounce(search, 500);
+function keyupCallback(event) {
+  // * * * * * *
+  // 1. map
+  // * * * * * *
+  const text = event.target.value;
+  // * * * * * *
+  // 2. filter
+  // * * * * * *
+  if (text.length > 2) {
+    // * * * * * *
+    // 3. debounce
+    // * * * * * *
+    debouncedSearch(text);
+  }
+}
+
+// inputEl.addEventListener('keyup', keyupCallback);

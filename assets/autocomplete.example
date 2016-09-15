@@ -1,26 +1,33 @@
-import { DOM } from 'rx-dom';
-
 export function searchWikipedia(term) {
   const cleanTerm = global.encodeURIComponent(term);
   const url = 'http://en.wikipedia.org/w/api.php?' +
     'action=opensearch&format=json&search=' +
     cleanTerm +
     '&callback=JSONPCallback';
+  // 6
   return DOM.jsonpRequest(url);
 }
 
-export default function wikiAutocompletedSaga(actions$) {
-  return actions$
-    .filter(action => action.type === 'wiki-search')
-    .map(({ payload: e }) => e)
+export default function AutoCompletedEpic(actions) {
+  return actions.ofType('SEARCH_WIKI')
+    .map(action => action.payload)
+    // 1
     .map(e => e.target.value)
+    // 2
     .filter(text => text.length > 2)
-    .throttle(750)
+    // 3
+    .debounce(500)
+    // 4
     .distinctUntilChanged()
-    .flatMapLatest(text => searchWikipedia(text))
+    // 5
+    .switchMap(text => searchWikipedia(text))
+    // 7
+    .map(({ response }) => response)
+    // 8
     .filter(data => data.length >= 2)
+    // 9 10
     .map(results => ({
-      type: 'wiki-search-completed',
+      type: 'SEACH_WIKI_COMPLETED',
       payload: results[1]
     }));
 }

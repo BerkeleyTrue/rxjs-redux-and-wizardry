@@ -1,0 +1,17 @@
+const observer = {
+  next(x) { console.log(`I got an ${x}!`); },
+  error(err) { console.error('oh noooooess!', err); },
+  complete() { console.log('I\'m done observing!'); }
+};
+
+function Observable(observer) {
+  const datasource = new DataSource();
+  datasource.ondata = (e) => observer.next(e);
+  datasource.onerror = (err) => observer.error(err);
+  datasource.oncomplete = () => observer.complete();
+  return () => {
+      datasource.destroy();
+  };
+}
+
+const cancel = Observable(observer);

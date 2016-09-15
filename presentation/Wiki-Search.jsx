@@ -7,6 +7,7 @@ function searchWikipedia(term) {
     'action=opensearch&format=json&search=' +
     cleanTerm +
     '&callback=JSONPCallback';
+  // 6. Make Request
   return DOM.jsonpRequest(url);
 }
 
@@ -19,12 +20,12 @@ export default class extends Component {
 
   componentDidMount() {
     this.__subscription = this.keyUp$
-      .map((e) => e.target.value)
+      .map(event => event.target.value)
       .filter(text => text.length > 2)
-      .throttle(750)
+      .debounce(500)
       .distinctUntilChanged()
       .flatMapLatest(text => searchWikipedia(text))
-      .map(({ response = [] } = {}) => response)
+      .map(({ response }) => response)
       .filter(data => data.length >= 2)
       .map(results => ({ results: results[1] }))
       .subscribe(
