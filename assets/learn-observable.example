@@ -1,17 +1,28 @@
-const observer = {
-  next(x) { console.log(`I got an ${x}!`); },
-  error(err) { console.error('oh noooooess!', err); },
-  complete() { console.log('I\'m done observing!'); }
-};
-
 function Observable(observer) {
-  const datasource = new DataSource();
-  datasource.ondata = (e) => observer.next(e);
-  datasource.onerror = (err) => observer.error(err);
-  datasource.oncomplete = () => observer.complete();
+  const ds = new CreateDatabaseConnection();
+  ds.ondata = (e) => observer.next(e);
+  ds.onerror = (err) => observer.error(err);
+  ds.oncomplete = () => observer.complete();
   return () => {
-      datasource.destroy();
+    ds.disconnectAndDestroy();
   };
 }
 
-const cancel = Observable(observer);
+const observer = {
+  next(x) { console.log(`I got an ${x}!`); },
+  error(err) { console.error('Error!', err); },
+  complete() { console.log('done!'); }
+};
+
+const observer1 = {
+  next(x) { console.log(`I got an ${x}!`); },
+  error(err) { console.error('Error!', err); },
+  complete() { console.log('I\'m done!'); }
+};
+
+setTimeout(
+  () => {
+    cancel();
+  },
+  5000
+);

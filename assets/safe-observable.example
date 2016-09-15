@@ -1,0 +1,28 @@
+function Observable(observer) {
+  const safeObserver = new SafeObserver(observer);
+  const ds = new CreateDatabaseConnection();
+  ds.ondata = (e) => safeObserver.next(e);
+  ds.onerror = (err) => safeObserver.error(err);
+  ds.oncomplete = () => safeObserver.complete();
+  return () => {
+    ds.disconnectAndDestroy();
+  };
+}
+
+const observer1 = {
+  next(x) { console.log(`I got an ${x}!`); },
+  error(err) { console.error('Error!', err); }
+};
+
+const observer2 = x => console.log(x * 5);
+
+const cancel1 = Observable(observer1);
+const cancel2 = Observable(observer2);
+
+setTimeout(
+  () => {
+    cancel1();
+    cancel2();
+  },
+  5000
+);
