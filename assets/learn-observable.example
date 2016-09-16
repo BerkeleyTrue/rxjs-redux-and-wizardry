@@ -14,11 +14,7 @@ const observer = {
   complete() { console.log('done!'); }
 };
 
-const observer1 = {
-  next(x) { console.log(`I got an ${x}!`); },
-  error(err) { console.error('Error!', err); },
-  complete() { console.log('I\'m done!'); }
-};
+const cancel = Observable(observer);
 
 setTimeout(
   () => {

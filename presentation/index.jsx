@@ -390,17 +390,28 @@ The comparison falls short.
             </Heading>
             <br />
             <Heading
-              size={ 2 }
+              size={ 3 }
               textColor='primary'
               >
-              can be sync/async
+              Sync or Async
             </Heading>
-            <br />
             <Heading
-              size={ 2 }
+              size={ 3 }
               textColor='primary'
               >
-              lazy vs eager
+              Lazy vs Eager
+            </Heading>
+            <Heading
+              size={ 3 }
+              textColor='primary'
+              >
+              Re-usable
+            </Heading>
+            <Heading
+              size={ 3 }
+              textColor='primary'
+              >
+              Multi-value
             </Heading>
           </Slide>
           <Slide
@@ -424,62 +435,13 @@ There is very little you can't do with Observables.
           </Slide>
           <Slide
             bgColor='secondary'
-            notes={'Need to create an tinder-like app?'}>
-            <Heading
-              size={ 1 }
-              textColor='white'>
-              Swipe left for no, right for 'hell yeah'?
-            </Heading>
-          </Slide>
-          <Slide bgColor='secondary'>
-            <Heading
-              size={ 1 }
-              textColor='white'>
-              Observables.
-            </Heading>
-          </Slide>
-          <Slide bgColor='secondary'>
-            <Heading
-              size={ 1 }
-              textColor='white'>
-Need to cache a database query for any number of request that expires after two
-hours and refreshes itself on the next request?
-            </Heading>
-          </Slide>
-          <Slide bgColor='secondary'>
-            <Heading
-              size={ 1 }
-              textColor='white'>
-              Observables.
-            </Heading>
-          </Slide>
-          <Slide bgColor='secondary'>
-            <Heading
-              size={ 4 }
-              textColor='white'>
-              Need to request the latest data from your server,
-              retry 4 times if it fails, and then gracefully show
-              your user a message informing them that the zombie
-              apocalypse has caused your request to fail and that
-              they should run for their lives?
-            </Heading>
-          </Slide>
-          <Slide bgColor='secondary'>
-            <Heading
-              size={ 1 }
-              textColor='primary'>
-              Observables.
-            </Heading>
-          </Slide>
-          <Slide
-            bgColor='secondary'
             notes={`
 In Redux, What is a side-effect?
               `}>
             <Heading
               size={ 1 }
               textColor='primary'>
-              How to Observables in Redux?
+              How to add Observables in Redux?
             </Heading>
           </Slide>
           <Slide>
