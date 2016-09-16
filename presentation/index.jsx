@@ -26,6 +26,9 @@ require('normalize.css');
 require('spectacle/lib/themes/default/index.css');
 
 import WikiSearch from './Wiki-Search.jsx';
+
+const benLeshTalk = 'https://medium.com/@benlesh/' +
+ 'learning-observable-by-building-observable-d5da57405d87';
 const images = {
   partyParrot: require('../assets/party-parrot.png')
 };
@@ -130,13 +133,13 @@ export default class Presentation extends React.Component {
               caps={ true }
               textColor='white'>
               <ListItem>
-                Current Redux Async Tools
-              </ListItem>
-              <ListItem>
                 What are Observables?
               </ListItem>
               <ListItem>
                 Why are Observables awesome?
+              </ListItem>
+              <ListItem>
+                Current Async in Redux
               </ListItem>
               <ListItem>
                 How to Observables in Redux
@@ -160,29 +163,225 @@ export default class Presentation extends React.Component {
               bold={ true }
               caps={ true }
               textColor='primary'>
-              A library for creating Observables created by Microsoft
+              A library for creating Observables
+            </Text>
+            <Text
+              bold={ true }
+              caps={ true }
+              textColor='primary'>
+              Rx => Reactive Extentions
             </Text>
           </Slide>
           <Slide
-            bgColor='primary'
             notes={`
-You can think of Observables in an abstract way as a special type of function
-that can return multiple items over time.`
-            }
+What is an Observable?
+            `}
             transition={['zoom']}>
-            <Heading
-              bold={ true }
-              caps={ true }
-              size={ 2 }
-              textColor='secondary'>
-              The shortest answer I've found that still makes sense:
-            </Heading>
+            <Link
+              href={ benLeshTalk }
+              >
+              <Heading
+                bold={ true }
+                caps={ true }
+                size={ 4 }
+                textColor='secondary'>
+                "A function that takes an observer and returns a function"
+              </Heading>
+              <Text
+                textColor='tertiary'
+                >
+                Ben Lesh - Learning Observables by Building Observables
+              </Text>
+            </Link>
           </Slide>
+          <Slide
+            notes={`
+What is an Observer?
+            `}
+            transition={['zoom']}
+            >
+            <Link
+              href={ benLeshTalk }
+              >
+              <Heading
+                bold={ true }
+                caps={ true }
+                size={ 4 }
+                textColor='secondary'>
+                "An object with `next`, `error` and `complete` methods on it."
+              </Heading>
+            </Link>
+          </Slide>
+          <Slide
+            notes={`
+So, what's the purpose of an observer?
+            `}
+            transition={['zoom']}
+            >
+            <Link
+              href={ benLeshTalk }
+              >
+              <Heading
+                bold={ true }
+                caps={ true }
+                size={ 4 }
+                textColor='secondary'>
+                "To connect an observer to a producer of values"
+              </Heading>
+            </Link>
+          </Slide>
+          <Slide
+            notes={`
+What about the returned function?
+            `}
+            transition={['zoom']}
+            >
+            <Link
+              href={ benLeshTalk }
+              >
+              <Heading
+                bold={ true }
+                caps={ true }
+                size={ 4 }
+                textColor='secondary'
+                >
+                "provide some way to tear down"
+              </Heading>
+            </Link>
+          </Slide>
+          <CodeSlide
+            code={require('raw!../assets/learn-observable.example') }
+            lang='js'
+            ranges={[
+              { loc: [0, 270], title: 'Observable' },
+              { loc: [0, 8], title: '' },
+              { loc: [0, 1] },
+              { loc: [1, 2] },
+              { loc: [2, 3] },
+              { loc: [3, 4] },
+              { loc: [4, 5] },
+              { loc: [5, 8] },
+              { loc: [10, 15] },
+              { loc: [16, 17] }
+            ]}
+            transition={[]}
+          />
+          <Slide
+            notes={`
+Observer guarentees
+            `}
+            transition={['zoom']}
+            >
+            <Link
+              href={ benLeshTalk }
+              >
+              <List>
+                <ListItem
+                  textColor='secondary'
+                  >
+Observer doesn’t have all of the methods implemented, that’s okay.
+                </ListItem>
+                <ListItem
+                  textColor='secondary'
+                  >
+You don’t want to call `next` after a `complete` or an `error`
+                </ListItem>
+                <ListItem
+                  textColor='secondary'
+                  >
+You don’t want anything called if you’ve unsubscribed.
+                </ListItem>
+                <ListItem
+                  textColor='secondary'
+                  >
+Calls to `complete` and `error` need to call unsubscription logic.
+                </ListItem>
+                <ListItem
+                  textColor='secondary'
+                  >
+Observer throws, you want to call your unsubscription
+                </ListItem>
+                <ListItem
+                  textColor='secondary'
+                  >
+`next`, `error` and `complete` are all actually optional.
+                </ListItem>
+              </List>
+            </Link>
+          </Slide>
+          <CodeSlide
+            code={require('raw!../assets/safe-observable.example') }
+            lang='js'
+            ranges={[
+              { loc: [0, 270], note: 'With Safe Observer' },
+              { loc: [0, 8], title: '' },
+              { loc: [0, 1] },
+              { loc: [1, 2] },
+              { loc: [2, 3] },
+              { loc: [3, 4] },
+              { loc: [4, 5] },
+              { loc: [5, 8] },
+              { loc: [10, 15] },
+              { loc: [16, 17] }
+            ]}
+            transition={[]}
+          />
+          <CodeSlide
+            code={require('raw!../assets/ergo-observable.example') }
+            lang='js'
+            ranges={[
+              { loc: [0, 270], note: 'Developer Friendly' },
+              { loc: [0, 8], title: '' },
+              { loc: [0, 1] },
+              { loc: [1, 2] },
+              { loc: [2, 3] },
+              { loc: [3, 4] },
+              { loc: [4, 5] },
+              { loc: [5, 8] },
+              { loc: [10, 15] },
+              { loc: [16, 17] }
+            ]}
+            transition={[]}
+          />
+          <CodeSlide
+            code={require('raw!../assets/operator-map.example') }
+            lang='js'
+            ranges={[
+              { loc: [0, 270], note: 'Map Operator' },
+              { loc: [0, 8], title: '' },
+              { loc: [0, 1] },
+              { loc: [1, 2] },
+              { loc: [2, 3] },
+              { loc: [3, 4] },
+              { loc: [4, 5] },
+              { loc: [5, 8] },
+              { loc: [10, 15] },
+              { loc: [16, 17] }
+            ]}
+            transition={[]}
+          />
+          <CodeSlide
+            code={require('raw!../assets/operator-map-prototype.example') }
+            lang='js'
+            ranges={[
+              { loc: [0, 270], note: 'Add to prototype' },
+              { loc: [0, 8], title: '' },
+              { loc: [0, 1] },
+              { loc: [1, 2] },
+              { loc: [2, 3] },
+              { loc: [3, 4] },
+              { loc: [4, 5] },
+              { loc: [5, 8] },
+              { loc: [10, 15] },
+              { loc: [16, 17] }
+            ]}
+            transition={[]}
+          />
           <Slide
             bgColor='secondary'
             notes={`
-Observables are often compared to promises. While they can do what promises do,
-the comparison falls short.
+Observables are often compared to promises.
+The comparison falls short.
             `}>
             <Heading
               size={ 1 }
@@ -192,14 +391,16 @@ the comparison falls short.
             <br />
             <Heading
               size={ 2 }
-              textColor='primary'>
-              Observables can be sync or async
+              textColor='primary'
+              >
+              can be sync/async
             </Heading>
             <br />
             <Heading
               size={ 2 }
-              textColor='primary'>
-              Observables are lazy
+              textColor='primary'
+              >
+              lazy vs eager
             </Heading>
           </Slide>
           <Slide
