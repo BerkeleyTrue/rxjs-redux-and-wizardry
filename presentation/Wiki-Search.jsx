@@ -45,7 +45,7 @@ export default class extends Component {
     const results = this.state && this.state.results || [];
     return (
       <div>
-        <div>Async Autocomplete</div>
+        <div>Wiki Search with Autocomplete</div>
         <input
           id='searchtext'
           onKeyUp={ e => this.keyUp$.onNext(e) }

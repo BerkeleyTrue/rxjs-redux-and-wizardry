@@ -12,7 +12,7 @@ function makeGetRequest(url) {
   }
   // 6 make xhr request
   const xhr = new XMLHttpRequest();
-  // flatMapLatest
+  //
   previousXhr = xhr;
   xhr.open('GET', url, true);
   xhr.send();

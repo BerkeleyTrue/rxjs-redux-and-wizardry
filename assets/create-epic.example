@@ -1,24 +1,14 @@
-import { render, createEpic } from 'redux-epic';
+import { createStore, applyMiddleware } from 'redux';
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import myEpics from './epics';
 
-const serviceOptions = {
-  api: '/services'
-};
+const rootEpic = combineEpics(...myEpics);
 
-const sagaOptions = {
-  document: window.document,
-  services: servicesCreator(null, serviceOptions)
-};
-const sagaMiddleware = createEpic(sagaOptions, fetchChallengeSaga, titleSaga);
-const enhancers = [
-  applyMiddleware(...middlewares, sagaMiddleware),
-];
-const reducer = createReducer(sideReducers);
-const store = compose(...enhancers)(createStore)(reducer, initialState);
+const reducer = (state) => state;
 
-render(
-  <Provider store={ store }><App /></Provider>,
-  document.getElementById('root')
-).subscribe(
-  () => console.log('react app mounted'),
-  err => { throw err; }
+const epicMiddleware = createEpicMiddleware(rootEpic);
+
+const store = createStore(
+  reducer,
+  applyMiddleware(epicMiddleware)
 );

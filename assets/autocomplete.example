@@ -8,7 +8,7 @@ export function searchWikipedia(term) {
   return DOM.jsonpRequest(url);
 }
 
-export default function AutoCompletedEpic(actions) {
+export default function autoCompletedEpic(actions) {
   return actions.ofType('SEARCH_WIKI')
     .map(action => action.payload)
     // 1

@@ -446,9 +446,6 @@ In Redux, What is a side-effect?
               How to add Observables in Redux?
             </Heading>
           </Slide>
-          <Slide>
-            <WikiSearch />
-          </Slide>
           <Slide
             bgColor='secondary'
             notes={`
@@ -509,7 +506,7 @@ Responding to user mouse clicks
                 Redux-Promises
               </ListItem>
               <ListItem>
-                Redux-Rx
+                Redux-Saga
               </ListItem>
               <ListItem>
                 Redux-Observable
@@ -518,14 +515,20 @@ Responding to user mouse clicks
           </Slide>
           <Slide>
             <Heading
-              textColor='secondary'>
-            Redux-Observable
+              textColor='secondary'
+              >
+              Redux-Saga
+            </Heading>
+            <Heading
+              textColor='secondary'
+              >
+              Redux-Observable
             </Heading>
           </Slide>
           <Slide>
             <Heading
               textColor='secondary'>
-              Why (Epics/Sagas) are better
+              Why Epics are better
             </Heading>
             <List
               bold={ true }
@@ -537,7 +540,7 @@ Responding to user mouse clicks
                 Action Creators are plain functions
               </ListItem>
               <ListItem>
-                Epic's can individually be tested
+                Epics can individually be tested
               </ListItem>
             </List>
           </Slide>
@@ -545,9 +548,10 @@ Responding to user mouse clicks
             code={ require('raw!../assets/saga.example') }
             lang='jsx'
             ranges={[
+              { loc: [ 0, 255 ], title: 'Redux-Saga' },
               { loc: [ 0, 1 ] },
-              { loc: [ 2, 6] },
-              { loc: [ 7, 10 ] }
+              { loc: [ 7, 10 ] },
+              { loc: [ 2, 6] }
             ]}
             textSize={ 25 }
             transition={[ 'zoom', 'fade' ]}
@@ -555,7 +559,7 @@ Responding to user mouse clicks
           <Slide>
             <Heading
               textColor='secondary'>
-              In comes Redux-Observable
+              Here comes Redux-Observable
             </Heading>
           </Slide>
           <Slide>
@@ -583,13 +587,13 @@ Responding to user mouse clicks
             code={ require('raw!../assets/epic.example') }
             lang='jsx'
             ranges={[
-              { loc: [ 0, 1 ] },
-              { loc: [ 1, 2 ] },
-              { loc: [ 2, 3 ] },
-              { loc: [ 3, 10 ] },
+              { loc: [ 0, 255 ], title: 'EPIC!'},
+              { loc: [ 4, 15 ] },
               { loc: [ 4, 5 ] },
-              { loc: [ 5, 8 ] },
-              { loc: [ 8, 9 ] }
+              { loc: [ 5, 6 ] },
+              { loc: [ 6, 7 ] },
+              { loc: [ 7, 12 ] },
+              { loc: [ 11, 12 ] }
             ]}
             textSize={ 20 }
             transition={[]}
@@ -598,45 +602,80 @@ Responding to user mouse clicks
             code={ require('raw!../assets/autocomplete.example') }
             lang='jsx'
             ranges={[
-              { loc: [ 0, 1 ] },
-              { loc: [ 2, 10 ] },
-              { loc: [ 11, 26 ] },
-              { loc: [ 13, 25 ] },
-              { loc: [ 21, 25 ] }
+              { loc: [ 0, 255 ], title: 'AUTOCOMPLETE' },
+              { loc: [ 10, 33 ] },
+              { loc: [ 11, 12 ] },
+              { loc: [ 12, 13 ] },
+              { loc: [ 13, 15 ] },
+              { loc: [ 15, 17 ] },
+              { loc: [ 17, 19 ] },
+              { loc: [ 19, 21 ] },
+              { loc: [ 21, 23 ] },
+              { loc: [ 23, 25 ] },
+              { loc: [ 25, 27 ] },
+              { loc: [ 27, 32 ] }
             ]}
             textSize={ 20 }
+            transition={[]}
+          />
+          <Slide>
+            <WikiSearch />
+          </Slide>
+          <CodeSlide
+            code={require('raw!../assets/wiki-auto-imperative.example')}
+            lang='js'
+            ranges={[
+              { loc: [0, 270], title: 'Autocomplete' },
+              { loc: [68, 72] },
+              { loc: [72, 76] },
+              { loc: [76, 80] },
+              { loc: [45, 51] },
+              { loc: [5, 12] },
+              { loc: [12, 22] },
+              { loc: [30, 35] },
+              { loc: [35, 37] },
+              { loc: [37, 41] },
+              { loc: [61, 64]}
+            ]}
             transition={[]}
           />
           <CodeSlide
             code={require('raw!../assets/create-epic.example')}
             lang='jsx'
             ranges={[
-              { loc: [ 0, 1 ] },
-              { loc: [ 6, 10 ] },
-              { loc: [ 10, 11 ] },
-              { loc: [ 11, 14 ] },
-              { loc: [ 14, 16 ] },
-              { loc: [ 17, 24 ] }
+              { loc: [ 0, 255 ], title: 'CREATE EPIC!' },
+              { loc: [ 0, 3 ] },
+              { loc: [ 2, 3 ] },
+              { loc: [ 4, 5 ] },
+              { loc: [ 6, 7 ] },
+              { loc: [ 8, 9 ] },
+              { loc: [ 10, 14 ] }
             ]}
             textSize={ 20 }
             transition={[]}
           />
           <Slide
             notes={`
-create composed store enhancer
-use store enhancer function to enhance createStore function
-call enhanced createStore function with reducer and initialState
-to create store
             `}>
             <Link
-              href='https://github.com/berkeleytrue/react-rxjs-and-you'
+              href='https://github.com/redux-observable/redux-observable'
               target='_blank'>
               <Heading
                 textColor='secondary'
                 textSize={ 60 }>
-                github.com/berkeleyTrue/redux-epic
+                github.com/redux-observable/redux-observable
               </Heading>
             </Link>
+          </Slide>
+          <Slide
+            notes={`
+            `}
+            >
+            <Heading
+              textColor='secondary'
+              textSize={ 60 }>
+              Questions?
+            </Heading>
           </Slide>
         </Deck>
       </Spectacle>

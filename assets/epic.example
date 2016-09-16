@@ -4,8 +4,8 @@ import { fetchChallengesCompleted } from './actionCreators';
 
 export default function fetchChallengesEpic(actions) {
   return actions.ofType('FETCH_CHALLENGE')
-    .flatMap(() => {
-      return services.readService$({ service: 'challenges' })
+    .switchMap(() => {
+      return services.readService({ service: 'challenges' })
         .map(({ entities, result } = {}) => {
           return fetchChallengesCompleted(entities, result);
         })
