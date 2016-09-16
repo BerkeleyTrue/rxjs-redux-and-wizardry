@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "/dist/"
+    publicPath: "/redux-and-rx-equals-party-parrot/"
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
