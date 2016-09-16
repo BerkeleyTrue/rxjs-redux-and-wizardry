@@ -214,24 +214,6 @@ What is an Observer?
           </Slide>
           <Slide
             notes={`
-So, what's the purpose of an observer?
-            `}
-            transition={['zoom']}
-            >
-            <Link
-              href={ benLeshTalk }
-              >
-              <Heading
-                bold={ true }
-                caps={ true }
-                size={ 4 }
-                textColor='secondary'>
-                "To connect an observer to a producer of values"
-              </Heading>
-            </Link>
-          </Slide>
-          <Slide
-            notes={`
 What about the returned function?
             `}
             transition={['zoom']}
@@ -249,12 +231,30 @@ What about the returned function?
               </Heading>
             </Link>
           </Slide>
+          <Slide
+            notes={`
+So, what's the purpose of an observer?
+            `}
+            transition={['zoom']}
+            >
+            <Link
+              href={ benLeshTalk }
+              >
+              <Heading
+                bold={ true }
+                caps={ true }
+                size={ 4 }
+                textColor='secondary'>
+                "To connect an observer to a producer of values"
+              </Heading>
+            </Link>
+          </Slide>
           <CodeSlide
             code={require('raw!../assets/learn-observable.example') }
             lang='js'
             ranges={[
               { loc: [0, 270], title: 'Observable' },
-              { loc: [0, 8], title: '' },
+              { loc: [0, 9], title: '' },
               { loc: [0, 1] },
               { loc: [1, 2] },
               { loc: [2, 3] },
@@ -262,7 +262,11 @@ What about the returned function?
               { loc: [4, 5] },
               { loc: [5, 8] },
               { loc: [10, 15] },
-              { loc: [16, 17] }
+              { loc: [11, 12] },
+              { loc: [12, 13] },
+              { loc: [13, 14] },
+              { loc: [16, 17] },
+              { loc: [18, 24] }
             ]}
             transition={[]}
           />
@@ -313,16 +317,16 @@ Observer throws, you want to call your unsubscription
             code={require('raw!../assets/safe-observable.example') }
             lang='js'
             ranges={[
-              { loc: [0, 270], note: 'With Safe Observer' },
-              { loc: [0, 8], title: '' },
+              { loc: [0, 270], title: 'With Safe Observer' },
               { loc: [0, 1] },
               { loc: [1, 2] },
-              { loc: [2, 3] },
               { loc: [3, 4] },
               { loc: [4, 5] },
-              { loc: [5, 8] },
-              { loc: [10, 15] },
-              { loc: [16, 17] }
+              { loc: [5, 6] },
+              { loc: [11, 15] },
+              { loc: [16, 17] },
+              { loc: [18, 20] },
+              { loc: [21, 28] }
             ]}
             transition={[]}
           />
@@ -330,16 +334,16 @@ Observer throws, you want to call your unsubscription
             code={require('raw!../assets/ergo-observable.example') }
             lang='js'
             ranges={[
-              { loc: [0, 270], note: 'Developer Friendly' },
-              { loc: [0, 8], title: '' },
+              { loc: [0, 270], title: 'Developer Friendly' },
+              { loc: [0, 10], title: '' },
               { loc: [0, 1] },
               { loc: [1, 2] },
               { loc: [2, 3] },
-              { loc: [3, 4] },
               { loc: [4, 5] },
-              { loc: [5, 8] },
-              { loc: [10, 15] },
-              { loc: [16, 17] }
+              { loc: [5, 6] },
+              { loc: [12, 13] },
+              { loc: [14, 15] },
+              { loc: [16, 22] }
             ]}
             transition={[]}
           />
@@ -347,16 +351,17 @@ Observer throws, you want to call your unsubscription
             code={require('raw!../assets/operator-map.example') }
             lang='js'
             ranges={[
-              { loc: [0, 270], note: 'Map Operator' },
-              { loc: [0, 8], title: '' },
-              { loc: [0, 1] },
-              { loc: [1, 2] },
-              { loc: [2, 3] },
-              { loc: [3, 4] },
-              { loc: [4, 5] },
-              { loc: [5, 8] },
-              { loc: [10, 15] },
-              { loc: [16, 17] }
+              { loc: [0, 270], title: 'Operators' },
+              { loc: [0, 10] },
+              { loc: [11, 21], note: 'Map function'},
+              { loc: [11, 12], note: 'project is a function' },
+              { loc: [12, 13], note: 'Creates a new observable' },
+              { loc: [13, 17] },
+              { loc: [14, 15] },
+              { loc: [18, 19] },
+              { loc: [22, 23] },
+              { loc: [23, 24] },
+              { loc: [25, 29] }
             ]}
             transition={[]}
           />
@@ -364,16 +369,13 @@ Observer throws, you want to call your unsubscription
             code={require('raw!../assets/operator-map-prototype.example') }
             lang='js'
             ranges={[
-              { loc: [0, 270], note: 'Add to prototype' },
-              { loc: [0, 8], title: '' },
-              { loc: [0, 1] },
-              { loc: [1, 2] },
-              { loc: [2, 3] },
-              { loc: [3, 4] },
-              { loc: [4, 5] },
-              { loc: [5, 8] },
-              { loc: [10, 15] },
-              { loc: [16, 17] }
+              { loc: [0, 270], title: 'Chain-able' },
+              { loc: [0, 10] },
+              { loc: [11, 22], note: 'Add to prototype' },
+              { loc: [12, 13], note: '`this` is the source' },
+              { loc: [23, 24] },
+              { loc: [25, 26] },
+              { loc: [27, 31] }
             ]}
             transition={[]}
           />

@@ -3,7 +3,7 @@ const myDBObservable = new Observable(observer => {
   const ds = new CreateDatabaseConnection();
   ds.ondata = (e) => observer.next(e);
   ds.onerror = (err) => observer.error(err);
-  ds.oncompleted = (err) => observer.complete(err);
+  ds.oncomplete = () => observer.complete();
   return () => {
     ds.disconnectAndDestroy();
   };

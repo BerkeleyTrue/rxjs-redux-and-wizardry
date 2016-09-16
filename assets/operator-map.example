@@ -3,14 +3,11 @@ const myDBObservable = new Observable(observer => {
   const ds = new CreateDatabaseConnection();
   ds.ondata = (e) => observer.next(e);
   ds.onerror = (err) => observer.error(err);
-  ds.oncompleted = (err) => observer.complete(err);
+  ds.oncomplete = () => observer.complete();
   return () => {
     ds.disconnectAndDestroy();
   };
 });
-
-
-const observer = x => console.log(x * 5);
 
 function map(source, project) {
   return new Observable((observer) => {
@@ -23,6 +20,7 @@ function map(source, project) {
   });
 }
 
+const observer = x => console.log(x);
 const cancel = map(myDBObservable, x => x * 5).subscribe(observer);
 
 setTimeout(
