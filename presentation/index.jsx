@@ -3,6 +3,7 @@ import React from 'react';
 
 // Import Spectacle Core tags
 import {
+  Appear,
   Deck,
   Heading,
   Link,
@@ -134,11 +135,18 @@ export default class Presentation extends React.Component {
           <Slide
             bgColor='secondary'
             notes={`
-High level look at using RxJS Observables with React and Redux
             `}>
             <Heading>
-              What this is?
+              What should you expect?
             </Heading>
+            <Appear>
+              <Text
+                bold={ true }
+                size={ 4 }
+                >
+High level look at using Observables with React and Redux
+              </Text>
+            </Appear>
           </Slide>
           <Slide bgColor='secondary'>
             <Heading>
@@ -154,12 +162,22 @@ High level look at using RxJS Observables with React and Redux
               bold={ true }
               caps={ true }
               textColor='primary'>
-              Rx => Reactive Extentions
+              Rx === Reactive Extensions
             </Text>
+            <Appear>
+              <Text
+                bold={ true }
+                caps={ true }
+                textColor='primary'>
+                Observables are a reactive paradigm
+              </Text>
+            </Appear>
           </Slide>
           <Slide
             notes={`
 What is an Observable?
+In it's most basic form it's a function that takes an observer and
+returns a cancel or tear down function
             `}
             transition={['zoom']}>
             <Link
@@ -170,7 +188,8 @@ What is an Observable?
                 bold={ true }
                 caps={ true }
                 size={ 4 }
-                textColor='secondary'>
+                textColor='secondary'
+                >
                 "A function that takes an observer and returns a function"
               </Heading>
               <Text
@@ -178,6 +197,14 @@ What is an Observable?
                 >
                 Ben Lesh - Learning Observables by Building Observables
               </Text>
+              <Appear>
+                <Text
+                  size={ 4 }
+                  textColor='secondary'
+                  >
+                  Observable: observer => function
+                </Text>
+              </Appear>
             </Link>
           </Slide>
           <Slide
@@ -188,14 +215,29 @@ What is an Observer?
             >
             <Link
               href={ benLeshTalk }
+              target='_blank'
               >
               <Heading
-                bold={ true }
                 caps={ true }
-                size={ 4 }
-                textColor='secondary'>
-                "An object with `next`, `error` and `complete` methods on it."
+                size={ 2 }>
+                What is an Observer?
               </Heading>
+              <Appear>
+                <Heading
+                  bold={ true }
+                  caps={ false }
+                  size={ 4 }
+                  textColor='secondary'>
+                  "An object with `next`, `error` and `complete` methods on it."
+                </Heading>
+              </Appear>
+              <Appear>
+                <Text textColor='secondary'>
+                  Observer: {
+                    '{ next: Func, error: Func, complete: Func }'
+                  }
+                </Text>
+              </Appear>
             </Link>
           </Slide>
           <Slide
@@ -206,33 +248,78 @@ What about the returned function?
             >
             <Link
               href={ benLeshTalk }
+              target='_blank'
               >
               <Heading
                 bold={ true }
-                caps={ true }
+                caps={ false }
                 size={ 4 }
                 textColor='secondary'
                 >
-                "provide some way to tear down"
+                What about the returned function?
               </Heading>
+              <Appear>
+                <Heading
+                  bold={ true }
+                  caps={ false }
+                  size={ 4 }
+                  textColor='secondary'
+                  >
+                  Provide some way to tear down
+                </Heading>
+              </Appear>
+              <Appear>
+                <Text textColor='secondary'>
+                  Observable: observable => TearDown
+                </Text>
+              </Appear>
             </Link>
           </Slide>
           <Slide
             notes={`
-So, what's the purpose of an observer?
             `}
             transition={['zoom']}
             >
             <Link
-              href={ benLeshTalk }
+              href='http://jsbin.com/yazedu/1/edit?js,console,output'
+              target='_blank'
               >
               <Heading
                 bold={ true }
                 caps={ true }
                 size={ 4 }
                 textColor='secondary'>
-                "To connect an observer to a producer of values"
+                What is the purpose of an Observable?
               </Heading>
+              <Appear>
+                <Heading
+                  size={ 5 }
+                  textColor='secondary'
+                  >
+                  "To connect an observer to something that produces values"
+                </Heading>
+              </Appear>
+              <Appear>
+                <Text textColor='secondary'>
+                  [ 1, 2, 3 ]
+                </Text>
+              </Appear>
+              <Appear>
+                <Text textColor='secondary'>
+                  Websocket
+                </Text>
+              </Appear>
+              <Appear>
+                <Text textColor='secondary'>
+                  Reactive Database
+                </Text>
+              </Appear>
+              <Appear>
+                <Heading
+                  size={ 6 }
+                  textColor='secondary'> (RIP: RethinkDB)
+                </Heading>
+              </Appear>
             </Link>
           </Slide>
           <CodeSlide
@@ -264,39 +351,53 @@ Observer guarentees
             >
             <Link
               href={ benLeshTalk }
+              target='_blank'
               >
-              <List>
-                <ListItem
-                  textColor='secondary'
-                  >
-Observer doesn’t have all of the methods implemented, that’s okay.
-                </ListItem>
-                <ListItem
-                  textColor='secondary'
-                  >
-You don’t want to call `next` after a `complete` or an `error`
-                </ListItem>
-                <ListItem
-                  textColor='secondary'
-                  >
-You don’t want anything called if you’ve unsubscribed.
-                </ListItem>
-                <ListItem
-                  textColor='secondary'
-                  >
-Calls to `complete` and `error` need to call unsubscription logic.
-                </ListItem>
-                <ListItem
-                  textColor='secondary'
-                  >
-Observer throws, you want to call your unsubscription
-                </ListItem>
-                <ListItem
-                  textColor='secondary'
-                  >
-`next`, `error` and `complete` are all actually optional.
-                </ListItem>
-              </List>
+              <Heading>
+                DX
+              </Heading>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Missing Methods? No worries
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Error? Prevent future `next`, `complete` calls
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+unsubscribed? Prevent future `next`, `complete` calls
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Complete or error? Auto tear down
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Observer throws? Auto tear down
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Make `next`, `error` and `complete` optional
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Only want `next`? Skip the object, pass in a plain function
+              </Text>
             </Link>
           </Slide>
           <CodeSlide
@@ -316,6 +417,11 @@ Observer throws, you want to call your unsubscription
             ]}
             transition={[]}
           />
+          <Slide>
+            <Heading>
+              Make the whole process developer friendly
+            </Heading>
+          </Slide>
           <CodeSlide
             code={require('raw!../assets/ergo-observable.example') }
             lang='js'
@@ -333,6 +439,15 @@ Observer throws, you want to call your unsubscription
             ]}
             transition={[]}
           />
+          <Slide>
+            <Link
+              href=''
+              target='_blank'
+              >
+              <Heading>Operators are also Functions</Heading>
+              <Text textColor='secondary'>filter, map, reduce...</Text>
+            </Link>
+          </Slide>
           <CodeSlide
             code={require('raw!../assets/operator-map.example') }
             lang='js'
@@ -374,32 +489,32 @@ The comparison falls short.
             <Heading
               size={ 1 }
               textColor='primary'>
-              How do they relate to Promises?
+              Observables vs Promises?
             </Heading>
             <br />
             <Heading
               size={ 3 }
               textColor='primary'
               >
-              Sync or Async
+              Async Or Sync|Always async
             </Heading>
             <Heading
               size={ 3 }
               textColor='primary'
               >
-              Lazy vs Eager
+              Lazy|Eager
             </Heading>
             <Heading
               size={ 3 }
               textColor='primary'
               >
-              Re-usable
+              Re-usable|Single Use
             </Heading>
             <Heading
               size={ 3 }
               textColor='primary'
               >
-              Multi-value
+              Multi Value|Single Value
             </Heading>
           </Slide>
           <Slide
@@ -413,13 +528,35 @@ The comparison falls short.
           <Slide
             bgColor='secondary'
             notes={`
-There is very little you can't do with Observables.
+Declaratively: Write what the code should do not how to do it
+Composable: Combine Observables in a veriaty of ways
             `}>
             <Heading
               size={ 1 }
               textColor='white'>
               Observable are powerful.
             </Heading>
+            <Appear>
+              <Heading
+                size={ 3 }>
+There is very little you can't do with Observables.
+              </Heading>
+            </Appear>
+            <Appear>
+              <Heading
+                size={ 3 }>
+Declaratively write async code
+              </Heading>
+            </Appear>
+            <Appear>
+              <Heading
+                size={ 3 }>
+Composable
+              </Heading>
+            </Appear>
+          </Slide>
+          <Slide>
+            <WikiSearch />
           </Slide>
           <Slide
             bgColor='secondary'
@@ -432,15 +569,19 @@ In Redux, What is a side-effect?
               How to add Observables in Redux?
             </Heading>
           </Slide>
+      {
+        /*
           <Slide
             bgColor='secondary'
             notes={`
-Anything that is not a simple input-output function is considered a side-effect.
             `}>
             <Heading
               size={ 1 }
               textColor='primary'>
               Side-Effects
+            </Heading>
+            <Heading size={ 3 }>
+Anything that is not a simple input-output function is considered a side-effect.
             </Heading>
           </Slide>
           <Slide>
@@ -461,91 +602,34 @@ Add a time counter(tick)
 Adding items to localStorage
               </ListItem>
               <ListItem>
-Changing the document title property on page change
+Changing the document title
               </ListItem>
               <ListItem>
 Reading cookies
               </ListItem>
               <ListItem>
-Authentication
+Authenticating a user
               </ListItem>
               <ListItem>
-Initiating and listening to websocket
+Listening to WebSocket
               </ListItem>
               <ListItem>
-Responding to user mouse clicks
+user mouse events
               </ListItem>
             </List>
           </Slide>
+         */
+         }
           <Slide>
             <Heading
               textColor='secondary'>
-              Current Async story in Redux
-            </Heading>
-            <List
-              bold={ true }
-              caps={ true }>
-              <ListItem>
-                Redux-Thunk
-              </ListItem>
-              <ListItem>
-                Redux-Promises
-              </ListItem>
-              <ListItem>
-                Redux-Saga
-              </ListItem>
-              <ListItem>
-                Redux-Observable
-              </ListItem>
-            </List>
-          </Slide>
-          <Slide>
-            <Heading
-              textColor='secondary'
-              >
-              Redux-Saga
+              Welcome Redux-Observable
             </Heading>
             <Heading
-              textColor='secondary'
-              >
-              Redux-Observable
-            </Heading>
-          </Slide>
-          <Slide>
-            <Heading
-              textColor='secondary'>
-              Why Epics are better
-            </Heading>
-            <List
-              bold={ true }
-              caps={ true }>
-              <ListItem>
-                Complex logic in one place
-              </ListItem>
-              <ListItem>
-                Action Creators are plain functions
-              </ListItem>
-              <ListItem>
-                Epics can individually be tested
-              </ListItem>
-            </List>
-          </Slide>
-          <CodeSlide
-            code={ require('raw!../assets/saga.example') }
-            lang='jsx'
-            ranges={[
-              { loc: [ 0, 255 ], title: 'Redux-Saga' },
-              { loc: [ 0, 1 ] },
-              { loc: [ 7, 10 ] },
-              { loc: [ 2, 6] }
-            ]}
-            textSize={ 25 }
-            transition={[ 'zoom', 'fade' ]}
-          />
-          <Slide>
-            <Heading
-              textColor='secondary'>
-              Here comes Redux-Observable
+              size={ 3 }
+              textColor='tertiary'>
+              An elegant and idiomatic way to
+              encapsulate side-effects in your Redux app
             </Heading>
           </Slide>
           <Slide>
@@ -560,14 +644,44 @@ Responding to user mouse clicks
                 Observables are powerful
               </ListItem>
               <List>
-                <ListItem>
-                  Smaller API surface
-                </ListItem>
-                <ListItem>
-                  Server-Side data pre-fetching (coming soon...)
-                </ListItem>
+                <Appear>
+                  <ListItem>
+                    Smaller API surface
+                  </ListItem>
+                </Appear>
+                <Appear>
+                  <ListItem>
+                    Server-Side data pre-fetching (coming soon...)
+                  </ListItem>
+                </Appear>
               </List>
             </List>
+            <Appear>
+              <List
+                bold={ true }
+                caps={ true }>
+                <ListItem>
+                  Observables are idiomatic
+                </ListItem>
+                <List>
+                  <Appear>
+                    <ListItem>
+                      functions
+                    </ListItem>
+                  </Appear>
+                  <Appear>
+                    <ListItem>
+                      chaining
+                    </ListItem>
+                  </Appear>
+                  <Appear>
+                    <ListItem>
+                      functional
+                    </ListItem>
+                  </Appear>
+                </List>
+              </List>
+            </Appear>
           </Slide>
           <CodeSlide
             code={ require('raw!../assets/epic.example') }
@@ -604,9 +718,6 @@ Responding to user mouse clicks
             textSize={ 20 }
             transition={[]}
           />
-          <Slide>
-            <WikiSearch />
-          </Slide>
           <CodeSlide
             code={require('raw!../assets/wiki-auto-imperative.example')}
             lang='js'
@@ -631,11 +742,12 @@ Responding to user mouse clicks
             ranges={[
               { loc: [ 0, 255 ], title: 'CREATE EPIC!' },
               { loc: [ 0, 3 ] },
+              { loc: [ 1, 2 ] },
               { loc: [ 2, 3 ] },
               { loc: [ 4, 5 ] },
               { loc: [ 6, 7 ] },
               { loc: [ 8, 9 ] },
-              { loc: [ 10, 14 ] }
+              { loc: [ 10, 15 ] }
             ]}
             textSize={ 20 }
             transition={[]}

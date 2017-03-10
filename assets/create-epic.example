@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import myEpics from './epics';
+import * as myEpics from './epics';
 
 const rootEpic = combineEpics(...myEpics);
 
@@ -8,6 +8,7 @@ const reducer = (state) => state;
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
+// normal redux
 const store = createStore(
   reducer,
   applyMiddleware(epicMiddleware)

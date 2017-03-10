@@ -1,6 +1,7 @@
 import { Subject, DOM } from 'rx-dom';
 import React, { Component } from 'react';
 
+const wikiLink = 'https://en.wikipedia.org/wiki/';
 function searchWikipedia(term) {
   const cleanTerm = global.encodeURIComponent(term);
   const url = 'http://en.wikipedia.org/w/api.php?' +
@@ -51,10 +52,25 @@ export default class extends Component {
           onKeyUp={ e => this.keyUp$.onNext(e) }
           type='text'
         />
-        <ul id='results'>
+        <ul
+          id='results'
+          style={{ listStyle: 'none' }}
+          text-align='left'
+          >
             {
                 results.map((result) =>
-                    <li key={ result }>{ result }</li>
+                  <li key={ result }>
+                    <a
+                      href={ wikiLink + result }
+                      style={{
+                        color: 'inherit',
+                        textDecoration: 'none'
+                      }}
+                      target='_blank'
+                      >
+                      { result }
+                    </a>
+                  </li>
                 )
             }
         </ul>
