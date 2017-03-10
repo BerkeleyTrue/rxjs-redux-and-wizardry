@@ -9,12 +9,12 @@ import {
   List,
   ListItem,
   Slide,
-  Image,
+  // Image,
   Spectacle,
   Text
 } from 'spectacle';
 
-import preloader from 'spectacle/lib/utils/preloader';
+// import preloader from 'spectacle/lib/utils/preloader';
 
 import CodeSlide from 'spectacle-code-slide';
 
@@ -29,11 +29,11 @@ import WikiSearch from './Wiki-Search.jsx';
 
 const benLeshTalk = 'https://medium.com/@benlesh/' +
  'learning-observable-by-building-observable-d5da57405d87';
-const images = {
-  partyParrot: require('../assets/party-parrot.png')
-};
+// const images = {
+//   partyParrot: require('../assets/party-parrot.png')
+// };
 
-preloader(images);
+// preloader(images);
 
 const reactBlue = '#00d8ff';
 
@@ -46,14 +46,6 @@ const theme = createTheme({
 
 export default class Presentation extends React.Component {
   render() {
-    const partyParrot = (
-      <Image
-        display='inline'
-        height={ 20 }
-        src={ images.partyParrot }
-        style={{ margin: 0 }}
-      />
-    );
     return (
       <Spectacle theme={theme}>
         <Deck transition={['zoom', 'slide']} transitionDuration={500}>
@@ -66,15 +58,13 @@ export default class Presentation extends React.Component {
               lineHeight={ 1 }
               size={ 1 }
               >
-              Redux + RxJS === { partyParrot }
+              RxJS: Redux and Wizardry
             </Heading>
           </Slide>
-          {
-            /*
           <Slide
             bgColor='secondary'>
             <Link
-              href='https://github.com/berkeleytrue/react-rxjs-and-you'
+              href='https://github.com/berkeleytrue/rxjs-redux-and-wizardry'
               target='_blank'>
               <Text
                 bold={ true }
@@ -86,12 +76,10 @@ export default class Presentation extends React.Component {
                 caps={ true }
                 fit={ true }
                 size={ 1 }>
-                BerkeleyTrue/react-rxjs-and-you
+                BerkeleyTrue/rxjs-redux-and-wizardry
               </Heading>
             </Link>
           </Slide>
-            */
-          }
           <Slide>
             <Heading
               textColor='secondary'>
@@ -99,24 +87,24 @@ export default class Presentation extends React.Component {
             </Heading>
             <List
               bold={ true }
-              caps={ true }>
+              caps={ false }>
               <ListItem>
-                Developer at Free Code Camp
+                freeCodeCamp('developer');
               </ListItem>
               <ListItem>
-                Teacher at Real World React
+                realWorldReact('teacher');
               </ListItem>
               <ListItem>
-                @BerkeleyTrue on the internet
+                internet('BerkeleyTrue');
               </ListItem>
               <ListItem>
-                RxJS Advocate
+                const isRxJSAdvocate = true;
               </ListItem>
               <ListItem>
-                Self Taught Programming for over two years
+                taughtBy('internet');
               </ListItem>
               <ListItem>
-                Fellow Human
+                filter(berks => isHuman(berks) === true);
               </ListItem>
             </List>
           </Slide>
@@ -139,17 +127,14 @@ export default class Presentation extends React.Component {
                 Why are Observables awesome?
               </ListItem>
               <ListItem>
-                Current Async in Redux
-              </ListItem>
-              <ListItem>
-                How to Observables in Redux
+                How to use Observables in Redux
               </ListItem>
             </List>
           </Slide>
           <Slide
             bgColor='secondary'
             notes={`
-              High level look at using RxJS Observables with React and Redux
+High level look at using RxJS Observables with React and Redux
             `}>
             <Heading>
               What this is?
@@ -179,6 +164,7 @@ What is an Observable?
             transition={['zoom']}>
             <Link
               href={ benLeshTalk }
+              target='_blank'
               >
               <Heading
                 bold={ true }
