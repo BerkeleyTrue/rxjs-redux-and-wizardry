@@ -492,30 +492,38 @@ The comparison falls short.
               Observables vs Promises?
             </Heading>
             <br />
-            <Heading
-              size={ 3 }
-              textColor='primary'
-              >
-              Async Or Sync|Always async
-            </Heading>
-            <Heading
-              size={ 3 }
-              textColor='primary'
-              >
-              Lazy|Eager
-            </Heading>
-            <Heading
-              size={ 3 }
-              textColor='primary'
-              >
-              Re-usable|Single Use
-            </Heading>
-            <Heading
-              size={ 3 }
-              textColor='primary'
-              >
-              Multi Value|Single Value
-            </Heading>
+            <Appear>
+              <Heading
+                size={ 3 }
+                textColor='primary'
+                >
+                Async Or Sync|Always async
+              </Heading>
+            </Appear>
+            <Appear>
+              <Heading
+                size={ 3 }
+                textColor='primary'
+                >
+                Lazy|Eager
+              </Heading>
+            </Appear>
+            <Appear>
+              <Heading
+                size={ 3 }
+                textColor='primary'
+                >
+                Re-usable|Single Use
+              </Heading>
+            </Appear>
+            <Appear>
+              <Heading
+                size={ 3 }
+                textColor='primary'
+                >
+                Multi Value|Single Value
+              </Heading>
+            </Appear>
           </Slide>
           <Slide
             bgColor='secondary'>
@@ -623,7 +631,7 @@ user mouse events
           <Slide>
             <Heading
               textColor='secondary'>
-              Welcome Redux-Observable
+              Redux-Observable
             </Heading>
             <Heading
               size={ 3 }
