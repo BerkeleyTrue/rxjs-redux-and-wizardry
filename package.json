@@ -1,19 +1,19 @@
 {
-  "name": "React-Redux-and-RxJS",
+  "name": "rxjs-redux-and-wizardy",
   "version": "0.0.1",
-  "description": "Redux-and-RxJS-equals-party-parrot",
+  "description": "Using RxJS in your Redux apps to reach high levels of Wizardry.",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
+    "prebuild": "npm run clean",
     "build": "NODE_ENV=production webpack --config webpack.config.production.js",
+    "postbuild": "NODE_ENV=production node build-production-html",
     "lint": "eslint --ext .js,.jsx .",
-    "deploy": "npm run clean && npm run build && cp gh-pages.index.html dist/index.html && node gh-pages",
     "start": "NODE_ENV=development node server.js"
   },
   "author": "Berkeley Martinez <Berkeley@RoboTie.com> (http://RoboTie.com)",
   "license": "MIT",
   "dependencies": {
-    "gh-pages": "^0.11.0",
     "normalize.css": "3.0.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
