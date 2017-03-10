@@ -1,4 +1,4 @@
-# React, RxJS, and You
+# RxJS: Redux and Wizardy
 
 ## How to start
 ```
