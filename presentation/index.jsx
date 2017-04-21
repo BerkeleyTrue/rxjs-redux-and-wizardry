@@ -65,19 +65,19 @@ export default class Presentation extends React.Component {
           <Slide
             bgColor='secondary'>
             <Link
-              href='https://github.com/berkeleytrue/rxjs-redux-and-wizardry'
+              href='https://rxjs-redux-and-wizardry.netlify.com'
               target='_blank'>
               <Text
                 bold={ true }
                 caps={ true }
                 >
-                View on Github:
+                View at:
               </Text>
               <Heading
                 caps={ true }
                 fit={ true }
                 size={ 1 }>
-                BerkeleyTrue/rxjs-redux-and-wizardry
+                rxjs-redux-and-wizardry.netlify.com
               </Heading>
             </Link>
           </Slide>
@@ -90,22 +90,19 @@ export default class Presentation extends React.Component {
               bold={ true }
               caps={ false }>
               <ListItem>
+                internet('BerkeleyTrue');
+              </ListItem>
+              <ListItem>
                 freeCodeCamp('developer');
               </ListItem>
               <ListItem>
                 realWorldReact('teacher');
               </ListItem>
               <ListItem>
-                internet('BerkeleyTrue');
-              </ListItem>
-              <ListItem>
                 const isRxJSAdvocate = true;
               </ListItem>
               <ListItem>
                 taughtBy('internet');
-              </ListItem>
-              <ListItem>
-                filter(berks => isHuman(berks) === true);
               </ListItem>
             </List>
           </Slide>
