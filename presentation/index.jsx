@@ -141,7 +141,7 @@ export default class Presentation extends React.Component {
                 bold={ true }
                 size={ 4 }
                 >
-High level look at using Observables with React and Redux
+High level look at using Observables with Redux
               </Text>
             </Appear>
           </Slide>
