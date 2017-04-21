@@ -59,7 +59,7 @@ export default class Presentation extends React.Component {
               lineHeight={ 1 }
               size={ 1 }
               >
-              RxJS: Redux and Wizardry
+              Redux Wizardry Using RxJS Observables
             </Heading>
           </Slide>
           <Slide
