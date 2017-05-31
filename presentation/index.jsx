@@ -741,6 +741,9 @@ user mouse events
             ]}
             transition={[]}
           />
+          <Slide>
+            <WikiSearch />
+          </Slide>
           <CodeSlide
             code={require('raw!../assets/create-epic.example')}
             lang='jsx'
