@@ -267,7 +267,7 @@ What about the returned function?
               </Appear>
               <Appear>
                 <Text textColor='secondary'>
-                  Observable: observable => TearDown
+                  Observable: observer => TearDown
                 </Text>
               </Appear>
             </Link>
@@ -656,7 +656,7 @@ user mouse events
                 </Appear>
                 <Appear>
                   <ListItem>
-                    Server-Side data pre-fetching (coming soon...)
+                    Server-Side rendering w/ data pre-fetching
                   </ListItem>
                 </Appear>
               </List>
