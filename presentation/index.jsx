@@ -704,6 +704,24 @@ user mouse events
             transition={[]}
           />
           <CodeSlide
+            code={require('raw!../assets/wiki-auto-imperative.example')}
+            lang='js'
+            ranges={[
+              { loc: [0, 270], title: 'Autocomplete' },
+              { loc: [68, 72] },
+              { loc: [72, 76] },
+              { loc: [76, 80] },
+              { loc: [45, 51] },
+              { loc: [5, 12] },
+              { loc: [12, 22] },
+              { loc: [30, 35] },
+              { loc: [35, 37] },
+              { loc: [37, 41] },
+              { loc: [61, 64]}
+            ]}
+            transition={[]}
+          />
+          <CodeSlide
             code={ require('raw!../assets/autocomplete.example') }
             lang='jsx'
             ranges={[
@@ -721,24 +739,6 @@ user mouse events
               { loc: [ 27, 32 ] }
             ]}
             textSize={ 20 }
-            transition={[]}
-          />
-          <CodeSlide
-            code={require('raw!../assets/wiki-auto-imperative.example')}
-            lang='js'
-            ranges={[
-              { loc: [0, 270], title: 'Autocomplete' },
-              { loc: [68, 72] },
-              { loc: [72, 76] },
-              { loc: [76, 80] },
-              { loc: [45, 51] },
-              { loc: [5, 12] },
-              { loc: [12, 22] },
-              { loc: [30, 35] },
-              { loc: [35, 37] },
-              { loc: [37, 41] },
-              { loc: [61, 64]}
-            ]}
             transition={[]}
           />
           <Slide>
