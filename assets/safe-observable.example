@@ -1,9 +1,9 @@
 function Observable(observer) {
-  const safeObserver = new SafeObserver(observer);
+  const sObserver = new SafeObserver(observer);
   const ds = new CreateDatabaseConnection();
-  ds.ondata = (x) => safeObserver.next(x);
-  ds.onerror = (err) => safeObserver.error(err);
-  ds.oncomplete = () => safeObserver.complete();
+  ds.ondata = (x) => sObserver.next(x);
+  ds.onerror = (err) => sObserver.error(err);
+  ds.oncomplete = () => sObserver.complete();
   return () => {
     ds.disconnectAndDestroy();
   };

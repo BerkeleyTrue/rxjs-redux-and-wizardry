@@ -351,7 +351,7 @@ Observer guarentees
               target='_blank'
               >
               <Heading>
-                DX
+                Observer DX
               </Heading>
               <Text
                 textAlign='left'
@@ -364,24 +364,6 @@ Missing Methods? No worries
                 textColor='secondary'
                 >
 Error? Prevent future `next`, `complete` calls
-              </Text>
-              <Text
-                textAlign='left'
-                textColor='secondary'
-                >
-unsubscribed? Prevent future `next`, `complete` calls
-              </Text>
-              <Text
-                textAlign='left'
-                textColor='secondary'
-                >
-Complete or error? Auto tear down
-              </Text>
-              <Text
-                textAlign='left'
-                textColor='secondary'
-                >
-Observer throws? Auto tear down
               </Text>
               <Text
                 textAlign='left'
@@ -414,25 +396,100 @@ Only want `next`? Skip the object, pass in a plain function
             ]}
             transition={[]}
           />
-          <Slide>
-            <Heading>
-              Make the whole process developer friendly
-            </Heading>
+          <Slide
+            notes={`
+Observer guarentees
+            `}
+            transition={['zoom']}
+            >
+            <Link
+              href={ benLeshTalk }
+              target='_blank'
+              >
+              <Heading>
+                Observable DX
+              </Heading>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+unsubscribed? Prevent future `next`, `complete` calls
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Complete or error? Auto tear down
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Observer throws? Auto tear down
+              </Text>
+              <Text
+                textAlign='left'
+                textColor='secondary'
+                >
+Prevent multiple teardown calls
+              </Text>
+            </Link>
           </Slide>
           <CodeSlide
             code={require('raw!../assets/ergo-observable.example') }
             lang='js'
             ranges={[
               { loc: [0, 270], title: 'Developer Friendly' },
-              { loc: [0, 10], title: '' },
-              { loc: [0, 1] },
-              { loc: [1, 2] },
-              { loc: [2, 3] },
-              { loc: [4, 5] },
-              { loc: [5, 6] },
-              { loc: [12, 13] },
-              { loc: [14, 15] },
-              { loc: [16, 22] }
+              { loc: [0, 1], note: 'Observable is now a class' },
+              {
+                loc: [0, 12],
+                note: 'We pass in a subscribe function to the constructor'
+              },
+              {
+                loc: [0, 12],
+                note: `This function is called with new observers by
+                  the subscribe method`
+              },
+              {
+                loc: [ 0, 1 ],
+                note: `Observer is made safe transparently by Observable
+                subscribe method`,
+                title: ''
+              },
+              {
+                loc: [ 5, 8 ],
+                note: `TearDown function is now wrapped in an unsubscribe
+                  object by the class`,
+                title: ''
+              },
+              {
+                loc: [ 5, 8 ],
+                note: `This prevents teardown logic from being called
+                  more than once`,
+                title: ''
+              },
+              {
+                loc: [ 13, 15 ],
+                note: 'we now subscribe to an observable instance',
+                title: ''
+              },
+              {
+                loc: [13, 15],
+                note: 'This returns the subscription object'
+              },
+              {
+                loc: [13, 15],
+                note: `We use this to teardown our observable subcription
+                  in the future`
+              },
+              {
+                loc: [16, 22],
+                note: 'We unsubscribe from the observable'
+              },
+              {
+                loc: [16, 22],
+                note: 'This calls the teardown logic of the ds observable'
+              }
             ]}
             transition={[]}
           />
@@ -446,34 +503,58 @@ Only want `next`? Skip the object, pass in a plain function
             </Link>
           </Slide>
           <CodeSlide
-            code={require('raw!../assets/operator-map.example') }
-            lang='js'
-            ranges={[
-              { loc: [0, 270], title: 'Operators' },
-              { loc: [0, 10] },
-              { loc: [11, 21], note: 'Map function'},
-              { loc: [11, 12], note: 'project is a function' },
-              { loc: [12, 13], note: 'Creates a new observable' },
-              { loc: [13, 17] },
-              { loc: [14, 15] },
-              { loc: [18, 19] },
-              { loc: [22, 23] },
-              { loc: [23, 24] },
-              { loc: [25, 29] }
-            ]}
-            transition={[]}
-          />
-          <CodeSlide
             code={require('raw!../assets/operator-map-prototype.example') }
             lang='js'
             ranges={[
-              { loc: [0, 270], title: 'Chain-able' },
-              { loc: [0, 10] },
-              { loc: [11, 22], note: 'Add to prototype' },
-              { loc: [12, 13], note: '`this` is the source' },
-              { loc: [23, 24] },
-              { loc: [25, 26] },
-              { loc: [27, 31] }
+              { loc: [0, 270], title: 'Operators' },
+              { loc: [0, 10], note: 'Add to prototype' },
+              { loc: [ 2, 3 ], note: 'We return an new Observable' },
+              {
+                loc: [ 1, 2 ],
+                note: 'Our producer is the observable instance'
+              },
+              { loc: [ 3, 8 ], note: 'We create a new observer' },
+              {
+                loc: [ 3, 8 ],
+                note: 'Connects your observer to the producer'
+              },
+              { loc: [ 4, 5 ], note: 'Projects the values from the producer' },
+              { loc: [ 4, 5 ], note: 'Then sends that to your observer' },
+              { loc: [ 8, 9 ], note: 'Subscribe to source'},
+              {
+                loc: [ 8, 9 ],
+                note: 'Pass our mapObserver to the original observable'
+              },
+              {
+                loc: [ 8, 9 ],
+                note: `We return the subscription object from the
+                source directly to the user`
+              },
+              {
+                loc: [11, 22],
+                note: 'Same ds observable as before'
+              },
+              {
+                loc: [22, 23],
+                note: 'Our observer'
+              },
+              { loc: [24, 27] },
+              {
+                loc: [ 25, 26 ],
+                note: 'We call the map method',
+                title: ''
+              },
+              {
+                loc: [ 25, 26 ],
+                note: 'we pass in a projection function',
+                title: ''
+              },
+              {
+                loc: [ 26, 27 ],
+                note: 'This creates a new observable that we then subscribe to',
+                title: ''
+              },
+              { loc: [28, 32] }
             ]}
             transition={[]}
           />

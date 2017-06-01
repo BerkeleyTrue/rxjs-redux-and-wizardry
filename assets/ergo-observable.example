@@ -1,5 +1,4 @@
 const myDBObservable = new Observable(observer => {
-  // observer is made safe by Observable constructor
   const ds = new CreateDatabaseConnection();
   ds.ondata = (x) => observer.next(x);
   ds.onerror = (err) => observer.error(err);
@@ -12,11 +11,12 @@ const myDBObservable = new Observable(observer => {
 
 const observer = x => console.log(x * 5);
 
-const cancel = myDBObservable.subscribe(observer);
+const subscription = myDBObservable
+  .subscribe(observer);
 
 setTimeout(
   () => {
-    cancel();
+    subscription.unsubscribe();
   },
   5000
 );

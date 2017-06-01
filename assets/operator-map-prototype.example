@@ -1,14 +1,3 @@
-const myDBObservable = new Observable(observer => {
-  // observer is made safe by Observable constructor
-  const ds = new CreateDatabaseConnection();
-  ds.ondata = (x) => observer.next(x);
-  ds.onerror = (err) => observer.error(err);
-  ds.oncomplete = () => observer.complete();
-  return () => {
-    ds.disconnectAndDestroy();
-  };
-});
-
 Observable.prototype.map = function map(project) {
   const source = this;
   return new Observable((observer) => {
@@ -21,11 +10,23 @@ Observable.prototype.map = function map(project) {
   });
 };
 
+const myDBObservable = new Observable(observer => {
+  const ds = new CreateDatabaseConnection();
+  ds.ondata = (x) => observer.next(x);
+  ds.onerror = (err) => observer.error(err);
+  ds.oncomplete = () => observer.complete();
+  return () => {
+    ds.disconnectAndDestroy();
+  };
+});
+
 const observer = x => console.log(x);
 
-const cancel = myDBObservable.map(x => x * 5).subscribe(observer);
+const subscription = myDBObservable
+  .map(x => x * 5)
+  .subscribe(observer);
 
 setTimeout(
-  () => cancel(),
+  () => subscription.unsubscribe(),
   5000
 );
