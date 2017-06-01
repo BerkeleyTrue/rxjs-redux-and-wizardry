@@ -1,7 +1,7 @@
 const myDBObservable = new Observable(observer => {
   // observer is made safe by Observable constructor
   const ds = new CreateDatabaseConnection();
-  ds.ondata = (e) => observer.next(e);
+  ds.ondata = (x) => observer.next(x);
   ds.onerror = (err) => observer.error(err);
   ds.oncomplete = () => observer.complete();
   return () => {

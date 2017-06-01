@@ -1,6 +1,6 @@
 function Observable(observer) {
   const ds = new CreateDatabaseConnection();
-  ds.ondata = (e) => observer.next(e);
+  ds.ondata = (x) => observer.next(x);
   ds.onerror = (err) => observer.error(err);
   ds.oncomplete = () => observer.complete();
   return () => {
