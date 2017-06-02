@@ -5,7 +5,7 @@ export function searchWikipedia(term) {
     cleanTerm +
     '&callback=JSONPCallback';
   // 6
-  return DOM.jsonpRequest(url);
+  return ajaxGetJSON(url);
 }
 
 export default function autoCompletedEpic(actions) {

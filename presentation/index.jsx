@@ -790,6 +790,11 @@ user mouse events
             ranges={[
               { loc: [ 0, 255 ], title: 'AUTOCOMPLETE' },
               { loc: [ 10, 33 ] },
+              {
+                loc: [ 0, 9 ],
+                note: '',
+                title: ''
+              },
               { loc: [ 11, 12 ] },
               { loc: [ 12, 13 ] },
               { loc: [ 13, 15 ] },
