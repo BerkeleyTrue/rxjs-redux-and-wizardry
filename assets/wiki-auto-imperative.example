@@ -2,13 +2,14 @@
 // https://github.com/OliverJAsh/autocomplete-comparison
 
 let previousXhr;
-function makeGetRequest(url) {
+function makeGetWithCancel(url) {
   // * * * * * * * * *
   // 5. switchMap
   // * * * * * * * * *
   if (previousXhr) {
     // cancel previous request
     previousXhr.abort();
+    previousXhr = null;
   }
   // 6 make xhr request
   const xhr = new XMLHttpRequest();
@@ -28,7 +29,7 @@ function searchWikipedia(term) {
     'action=opensearch&format=json&search=' +
     cleanTerm +
     '&origin=*';
-  return makeGetRequest(url)
+  return makeGetWithCancel(url)
     // * * * * * * * * *
     // 7. map
     // * * * * * * * * *
@@ -47,38 +48,48 @@ function searchDistinctUntilChanged(value) {
   // 4. distinctUntilChanged
   // * * * * * * * * *
   if (value !== previousValue) {
+    previousValue = value;
     return searchWikipedia(value);
   }
-  previousValue = value;
   return null;
 }
 
-function search(value) {
+function search(value, cb) {
   // maybePromise may be a promise or null
   const maybePromise = searchDistinctUntilChanged(value);
   if (!maybePromise) {
     return null;
   }
-  return maybePromise.then(results => {
-    this.setState({ results });
-  });
+  return maybePromise.then(x => cb(null, x)).catch(cb);
 }
 
-const debouncedSearch = debounce(search, 500);
-function keyupCallback(event) {
-  // * * * * * *
-  // 1. map
-  // * * * * * *
-  const text = event.target.value;
-  // * * * * * *
-  // 2. filter
-  // * * * * * *
-  if (text.length > 2) {
+const debouncedSearch = _.debounce(search, 500);
+
+class FooComponent extends React.Componenti {
+  onChange(e) {
+    // * * * * * *
+    // 1. map
+    // * * * * * *
+    const text = e.target.value;
+    // * * * * * *
+    // 2. filter
+    // * * * * * *
+    if (text.length <= 2) {
+      return null;
+    }
     // * * * * * *
     // 3. debounce
     // * * * * * *
-    debouncedSearch(text);
+    return debouncedSearch(text, (results) => {
+      this.setState({ results });
+    });
+  }
+
+  render() {
+    return (
+      <input
+        onChange={ this.onChange }
+      />
+    );
   }
 }
-
-// inputEl.addEventListener('keyup', keyupCallback);

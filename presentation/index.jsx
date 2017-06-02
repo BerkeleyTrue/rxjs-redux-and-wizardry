@@ -785,24 +785,6 @@ user mouse events
             transition={[]}
           />
           <CodeSlide
-            code={require('raw!../assets/wiki-auto-imperative.example')}
-            lang='js'
-            ranges={[
-              { loc: [0, 270], title: 'Autocomplete' },
-              { loc: [68, 72] },
-              { loc: [72, 76] },
-              { loc: [76, 80] },
-              { loc: [45, 51] },
-              { loc: [5, 12] },
-              { loc: [12, 22] },
-              { loc: [30, 35] },
-              { loc: [35, 37] },
-              { loc: [37, 41] },
-              { loc: [61, 64]}
-            ]}
-            transition={[]}
-          />
-          <CodeSlide
             code={ require('raw!../assets/autocomplete.example') }
             lang='jsx'
             ranges={[
@@ -820,6 +802,79 @@ user mouse events
               { loc: [ 27, 32 ] }
             ]}
             textSize={ 20 }
+            transition={[]}
+          />
+          <CodeSlide
+            code={require('raw!../assets/wiki-auto-imperative.example')}
+            lang='js'
+            ranges={[
+              { loc: [0, 270], title: 'Autocomplete' },
+              {
+                loc: [ 87, 94 ],
+                note: 'We create an onChange handler',
+                title: ''
+              },
+              {
+                loc: [ 68, 86 ],
+                note: 'onChange handler takes the event object',
+                title: ''
+              },
+              {
+                loc: [ 56, 64 ],
+                note: 'search takes a callback',
+                title: ''
+              },
+              {
+                loc: [ 65, 66 ],
+                note: 'add debounce to search',
+                title: ''
+              },
+              {
+                loc: [ 44, 53 ],
+                note: 'create a search when distinct function',
+                title: ''
+              },
+              {
+                loc: [ 25, 41 ],
+                note: '',
+                title: ''
+              },
+              {
+                loc: [ 31, 32 ],
+                note: '',
+                title: ''
+              },
+              {
+                loc: [ 3, 23 ],
+                note: 'make a get request',
+                title: ''
+              },
+              {
+                loc: [ 8, 13 ],
+                note: 'this will cancel previous in-flight requests',
+                title: ''
+              },
+              {
+                loc: [ 68, 69 ],
+                note: 'This is where we start',
+                title: ''
+              },
+              { loc: [69, 73], note: 'map event to input value' },
+              { loc: [73, 79], note: '' },
+              { loc: [79, 85] },
+              { loc: [46, 53] },
+              { loc: [5, 13] },
+              { loc: [13, 23] },
+              { loc: [32, 36] },
+              { loc: [36, 38] },
+              { loc: [38, 42] },
+              { loc: [62, 63]},
+              {
+                loc: [ 83, 84 ],
+                note: '',
+                title: ''
+              },
+            ]}
             transition={[]}
           />
           <Slide>
