@@ -1,0 +1,14 @@
+export default function autoLogoutEpic(actions, store, { document }) {
+  return actions.ofType('APP_MOUNTED')
+    .switchMap(() => {
+      return Observable.fromEvent(document, 'mousemove')
+        .switchMap(() => {
+          return Observable.merge(
+            Observable.of({ type: 'USER_INACTIVITY_TIMEOUT' })
+              .delay(DELAY_5_MIN),
+            Observable.of({ type: 'USER_INACTIVITY_LOGOUT' })
+              .delay(DELAY_7_MIN)
+          );
+        });
+    });
+}
